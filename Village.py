@@ -2,6 +2,48 @@ import customtkinter
 from tkinter import BOTH, RIGHT
 from PIL import Image
 
+
+# Variabile per tenere traccia della finestra toplevel
+info_window = None
+
+
+# Funzione per aprire la finestra toplevel
+def ouvrir_info_window():
+    global info_window
+    if info_window is None or not info_window.winfo_exists():
+        # Crea una nuova finsetra se non esite
+        info_window = customtkinter.CTkToplevel(village)
+        info_window.geometry("700x500")
+        info_window.title("Informations pratiques")
+        village.iconbitmap('./Images/can.ico')
+
+        # Aggiunge i frame di base
+        frame_1 = customtkinter.CTkFrame(info_window, fg_color="#f4b41a", height=400, width=600)
+        frame_2 = customtkinter.CTkFrame(frame_1, fg_color="ivory", corner_radius=20, height=400, width=600,
+                                         bg_color="#f4b41a", border_color="#143d59", border_width=10)
+        frame_1.pack(ipadx=10, ipady=10, expand=True, fill=BOTH)
+        frame_1.lower()
+        frame_2.place(relx=0.5, rely=0.5, anchor="center")
+
+        # Aggiunge le immagini della banca, del negozio e della fabbrica
+        photo_2 = customtkinter.CTkImage(light_image=Image.open("./Images/bank_2.ico"),
+                                         size=(50, 50))
+        photo_3 = customtkinter.CTkImage(light_image=Image.open("./Images/store.ico"),
+                                         size=(50, 50))
+        photo_4 = customtkinter.CTkImage(light_image=Image.open("./Images/factory_1.ico"),
+                                         size=(50, 50))
+        bank = customtkinter.CTkLabel(frame_2, image=photo_2, text=" ", font=style_3)
+        store = customtkinter.CTkLabel(frame_2, image=photo_3, text=" ", font=style_3)
+        factory = customtkinter.CTkLabel(frame_2, image=photo_4, text=" ", font=style_3)
+        bank.place(relx=0.1, rely=0.2, anchor="center")
+        store.place(relx=0.1, rely=0.4, anchor="center")
+        factory.place(relx=0.1, rely=0.6, anchor="center")
+
+    else:
+        # Porta in primo piano la finestra info_window se esiste
+        info_window.focus()
+
+# Definizione della finestra principale (Village)
 village = customtkinter.CTk()
 village.geometry("1000x800")
 village.title("Cash & Soda: La lutte pour la liberté")
@@ -72,8 +114,13 @@ titre.place(relx = 0.05, rely = 0.2, anchor = "w")
 
 
 # Labels per inserire del testo nel frame_3
-banque = customtkinter.CTkLabel(frame_3, text = "Se ti senti perso clicca qui", font = style_2, text_color="#143d59")
-banque.place(relx = 0.05, rely = 0.2, anchor = "w")
+information = customtkinter.CTkLabel(frame_3, text = "Se ti senti perso clicca qui", font = style_2, text_color="#143d59")
+information.place(relx = 0.05, rely = 0.2, anchor = "w")
+# Aggiunge i bottoni del frame_3
+info = customtkinter.CTkButton(frame_3, text="Info", text_color="#143d59", fg_color="#f4b41a", font=style_2,
+                               command=ouvrir_info_window)
+info.place(relx=0.8, rely=0.2, anchor="center")
+
 
 # Qui sono contenuti tutti i Widgets del frame_1
 # Labels per inserire del testo
@@ -85,58 +132,11 @@ compte_bancaire.place(relx = 0.1, rely = 0.1, anchor = "w")
 orange_bull.place(relx = 0.1, rely = 0.2, anchor = "w")
 titre_2.place(relx = 0.1, rely = 0.35, anchor = "w")
 ingredientes.place(relx = 0.1, rely = 0.4, anchor = "w")
-
 # Progressbar
 progressbar_1 = customtkinter.CTkProgressBar(frame_1, orientation="horizontal", fg_color="ivory", progress_color="#f4b41a")
 progressbar_2 = customtkinter.CTkProgressBar(frame_1, orientation="horizontal", fg_color="ivory", progress_color="#f4b41a")
 progressbar_1.place(relx = 0.1, rely = 0.15, anchor = "w")
 progressbar_2.place(relx = 0.1, rely = 0.25, anchor = "w")
-
-# Variabile per tenere traccia della finestra toplevel
-info_window = None
-
-
-# Funzione per aprire la finestra toplevel
-def ouvrir_info_window():
-    global info_window
-    if info_window is None or not info_window.winfo_exists():
-        # Crea una nuova finsetra se non esite
-        info_window = customtkinter.CTkToplevel(village)
-        info_window.geometry("700x500")
-        info_window.title("Informations pratiques")
-        village.iconbitmap('./Images/can.ico')
-
-        # Aggiunge i frame di base
-        frame_1 = customtkinter.CTkFrame(info_window, fg_color="#f4b41a", height=400, width=600)
-        frame_2 = customtkinter.CTkFrame(frame_1, fg_color="ivory", corner_radius=20, height=400, width=600,
-                                         bg_color="#f4b41a", border_color="#143d59", border_width=10)
-        frame_1.pack(ipadx=10, ipady=10, expand=True, fill=BOTH)
-        frame_1.lower()
-        frame_2.place(relx=0.5, rely=0.5, anchor="center")
-
-        # Aggiunge le immagini della banca, del negozio e della fabbrica
-        photo_2 = customtkinter.CTkImage(light_image=Image.open("./Images/bank_2.ico"),
-                                         size=(50, 50))
-        photo_3 = customtkinter.CTkImage(light_image=Image.open("./Images/store.ico"),
-                                         size=(50, 50))
-        photo_4 = customtkinter.CTkImage(light_image=Image.open("./Images/factory_1.ico"),
-                                         size=(50, 50))
-        bank = customtkinter.CTkLabel(frame_2, image=photo_2, text=" ", font=style_3)
-        store = customtkinter.CTkLabel(frame_2, image=photo_3, text=" ", font=style_3)
-        factory = customtkinter.CTkLabel(frame_2, image=photo_4, text=" ", font=style_3)
-        bank.place(relx=0.1, rely=0.2, anchor="center")
-        store.place(relx=0.1, rely=0.4, anchor="center")
-        factory.place(relx=0.1, rely=0.6, anchor="center")
-
-    else:
-        # Porta in primo piano la finestra info_window se esiste
-        info_window.focus()
-
-# Aggiunge i bottoni del frame_3
-info = customtkinter.CTkButton(frame_3, text="Info", text_color="#143d59", fg_color="#f4b41a", font=style_2,
-                               command=ouvrir_info_window)
-info.place(relx=0.8, rely=0.2, anchor="center")
-
 
 
 village.mainloop()
