@@ -1,6 +1,7 @@
 import customtkinter
 from tkinter import BOTH, RIGHT
 from PIL import Image
+from Depot import produit_1, produit_2, produit_3, produit_4, produit_5, produit_6, produit_7, produit_8
 
 
 # Variabile per tenere traccia della finestra toplevel
@@ -127,11 +128,19 @@ info.place(relx=0.8, rely=0.2, anchor="center")
 compte_bancaire = customtkinter.CTkLabel(frame_1, text = "Denaro a disposizione", font = style_2, text_color="ivory")
 orange_bull = customtkinter.CTkLabel(frame_1, text = "Orange Bull fabbricate", font = style_2, text_color="ivory")
 titre_2 = customtkinter.CTkLabel(frame_1, text = "Materiali", font = style_1, text_color="ivory")
-ingredientes = customtkinter.CTkLabel(frame_1, text = "Ingrediente 1\nIngrediente 2", font = style_2, text_color="ivory")
+ingredientes = customtkinter.CTkLabel(frame_1, text = f"\n{produit_1.nom} : {produit_1.quantite} {produit_1.unite}\n"
+                                                      f"\n{produit_2.nom} : {produit_2.quantite} {produit_2.unite}\n"
+                                                      f"\n{produit_3.nom} : {produit_3.quantite} {produit_3.unite}\n"
+                                                      f"\n{produit_4.nom} : {produit_4.quantite} {produit_4.unite}\n"
+                                                      f"\n{produit_5.nom} : {produit_5.quantite} {produit_5.unite}\n"
+                                                      f"\n{produit_6.nom} : {produit_6.quantite} {produit_6.unite}\n"
+                                                      f"\n{produit_7.nom} : {produit_7.quantite} {produit_7.unite}\n"
+                                                      f"\n{produit_8.nom} : {produit_8.quantite} {produit_8.unite}\n",
+                                      font = style_2, text_color="ivory", justify="left")
 compte_bancaire.place(relx = 0.1, rely = 0.1, anchor = "w")
 orange_bull.place(relx = 0.1, rely = 0.2, anchor = "w")
 titre_2.place(relx = 0.1, rely = 0.35, anchor = "w")
-ingredientes.place(relx = 0.1, rely = 0.4, anchor = "w")
+ingredientes.place(relx = 0.1, rely = 0.5, anchor = "w")
 # Progressbar
 progressbar_1 = customtkinter.CTkProgressBar(frame_1, orientation="horizontal", fg_color="ivory", progress_color="#f4b41a")
 progressbar_2 = customtkinter.CTkProgressBar(frame_1, orientation="horizontal", fg_color="ivory", progress_color="#f4b41a")
