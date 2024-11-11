@@ -1,7 +1,8 @@
 import customtkinter
-from tkinter import BOTH, RIGHT
+from tkinter import BOTH, RIGHT, StringVar
 from PIL import Image
 from Depot import produit_1, produit_2, produit_3, produit_4, produit_5, produit_6, produit_7, produit_8
+
 
 
 # Variabile per tenere traccia della finestra toplevel
@@ -50,43 +51,6 @@ village.geometry("1000x800")
 village.title("Cash & Soda: La lutte pour la liberté")
 village.iconbitmap('./Images/can.ico')
 
-# Funzione per aprire la finestra toplevel
-def ouvrir_info_window():
-    global info_window
-    if info_window is None or not info_window.winfo_exists():
-        # Crea una nuova finsetra se non esite
-        info_window = customtkinter.CTkToplevel(village)
-        info_window.geometry("700x500")
-        info_window.title("Informations pratiques")
-        village.iconbitmap('./Images/can.ico')
-
-        # Aggiunge i frame di base
-        frame_1 = customtkinter.CTkFrame(info_window, fg_color="#f4b41a", height=400, width=600)
-        frame_2 = customtkinter.CTkFrame(frame_1, fg_color="ivory", corner_radius=20, height=400, width=600,
-                                         bg_color="#f4b41a", border_color="#143d59", border_width=10)
-        frame_1.pack(ipadx=10, ipady=10, expand=True, fill=BOTH)
-        frame_1.lower()
-        frame_2.place(relx=0.5, rely=0.5, anchor="center")
-
-        # Aggiunge le immagini della banca, del negozio e della fabbrica
-        photo_2 = customtkinter.CTkImage(light_image=Image.open("./Images/bank_2.ico"),
-                                         size=(50, 50))
-        photo_3 = customtkinter.CTkImage(light_image=Image.open("./Images/store.ico"),
-                                         size=(50, 50))
-        photo_4 = customtkinter.CTkImage(light_image=Image.open("./Images/factory_1.ico"),
-                                         size=(50, 50))
-        bank = customtkinter.CTkLabel(frame_2, image=photo_2, text=" ", font=style_3)
-        store = customtkinter.CTkLabel(frame_2, image=photo_3, text=" ", font=style_3)
-        factory = customtkinter.CTkLabel(frame_2, image=photo_4, text=" ", font=style_3)
-        bank.place(relx=0.1, rely=0.2, anchor="center")
-        store.place(relx=0.1, rely=0.4, anchor="center")
-        factory.place(relx=0.1, rely=0.6, anchor="center")
-
-    else:
-        # Porta in primo piano la finestra info_window se esiste
-        info_window.focus()
-
-
 # Inserzione degli stili di scrittura
 style_1 = customtkinter.CTkFont("Aptos", 28, "bold")
 style_2 = customtkinter.CTkFont("Apotos", 18)
@@ -131,7 +95,19 @@ arrow_2.place(relx=0.08, rely=0.4, anchor="center")
 # Aggiunge i bottoni del frame_3
 info = customtkinter.CTkButton(frame_3, text="Info", text_color="#143d59", fg_color="#f4b41a", font=style_2,
                                command=ouvrir_info_window)
+execute = customtkinter.CTkButton(frame_3, text="Exécute", text_color="#143d59", fg_color="#f4b41a", font=style_2)
 info.place(relx=0.8, rely=0.2, anchor="center")
+execute.place(relx=0.8, rely=0.8, anchor="center")
+# Aggiungere una combobox nel frame_3
+def combobox_callback(choice):
+    print("combobox dropdown clicked:", choice)
+
+combobox = customtkinter.CTkComboBox(frame_3, values=["shop", "banque", "usine"],
+                                     command=combobox_callback, text_color="#143d59", fg_color="#f4b41a",
+                                     font=style_2, dropdown_font=style_2, border_color="#f4b41a",
+                                     dropdown_fg_color="#143d59")
+combobox.set("banque")
+combobox.place(relx = 0.8, rely = 0.4, anchor = "center")
 
 
 # Qui sono contenuti tutti i Widgets del frame_1
