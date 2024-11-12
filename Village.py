@@ -13,6 +13,7 @@ info_window = None
 def ouvrir_info_window():
     global info_window
     if info_window is None or not info_window.winfo_exists():
+
         # Crea una nuova finsetra se non esite
         info_window = customtkinter.CTkToplevel(village)
         info_window.geometry("700x500")
