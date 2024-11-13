@@ -4,65 +4,6 @@ import Depot
 from Depot import tous_les_produits, produit_1, produit_2, produit_3, produit_4, produit_5, produit_6, produit_7, produit_8
 
 
-# Definizione della finestra principale (Village)
-shop = customtkinter.CTk()
-shop.geometry("1000x800")
-shop.title("Cash & Soda: La lutte pour la liberté")
-shop.iconbitmap('./Images/can.ico')
-
-# Inserzione degli stili di scrittura
-style_1 = customtkinter.CTkFont("Aptos", 28, "bold")
-style_2 = customtkinter.CTkFont("Apotos", 18)
-style_3 = customtkinter.CTkFont("Apotos", 16, slant="italic")
-style_4 = customtkinter.CTkFont("Apotos", 24, "bold")
-style_5 = customtkinter.CTkFont("Apotos", 18, "bold")
-
-
-# Inserzione dei frame
-frame_1 = customtkinter.CTkFrame(shop, fg_color="#143d59", corner_radius=0, height=800, width=300)
-frame_2 = customtkinter.CTkFrame(shop, fg_color="#f4b41a", height=800, width=1000)
-frame_3 = customtkinter.CTkFrame(frame_2, fg_color="ivory", corner_radius=20, height=400, width=600,
-                                 bg_color="#f4b41a", border_color="#143d59", border_width=10)
-frame_4 = customtkinter.CTkFrame(frame_2, fg_color="#143d59", corner_radius=20, height=150, width=600,
-                                 bg_color="#f4b41a", border_color="ivory", border_width=5)
-frame_1.pack(ipadx=10, ipady=10, expand=True, fill=BOTH, side=RIGHT)
-frame_2.pack(ipadx=10, ipady=10, expand=True, fill=BOTH)
-frame_2.lower()
-frame_3.place(relx=0.5, rely=0.6, anchor="center")
-frame_4.place(relx=0.5, rely=0.2, anchor="center")
-
-
-
-# Widget del fraime_1
-titre_11 = customtkinter.CTkLabel(frame_1, text = "Panier:", font = style_1, text_color="ivory")
-titre_11.place(relx = 0.1, rely = 0.65, anchor = "w")
-textbox = customtkinter.CTkTextbox(frame_1, height=230, width=290, fg_color="#143d59", text_color="ivory", font=style_2)
-#textbox.configure(state="disabled")
-textbox.place(relx = 0.5, rely = 0.7, anchor = "n")
-# Per inserire la lita dei prodotti a disposizio e il titolo "Prodotti a disposizione"
-titre_12 = customtkinter.CTkLabel(frame_1, text = "Les produits à votre\ndisposition:", font = style_1, text_color="ivory", justify="left")
-ingredientes = customtkinter.CTkLabel(frame_1, text = f"\n{produit_1.nom} : {produit_1.quantite} {produit_1.unite}\n"
-                                                      f"\n{produit_2.nom} : {produit_2.quantite} {produit_2.unite}\n"
-                                                      f"\n{produit_3.nom} : {produit_3.quantite} {produit_3.unite}\n"
-                                                      f"\n{produit_4.nom} : {produit_4.quantite} {produit_4.unite}\n"
-                                                      f"\n{produit_5.nom} : {produit_5.quantite} {produit_5.unite}\n"
-                                                      f"\n{produit_6.nom} : {produit_6.quantite} {produit_6.unite}\n"
-                                                      f"\n{produit_7.nom} : {produit_7.quantite} {produit_7.unite}\n"
-                                                      f"\n{produit_8.nom} : {produit_8.quantite} {produit_8.unite}\n",
-                                      font = style_2, text_color="ivory", justify="left")
-titre_12.place(relx = 0.1, rely = 0.1, anchor = "w")
-ingredientes.place(relx = 0.1, rely = 0.38, anchor = "w")
-
-
-
-
-# Labels per inserire del testo nel frame_4
-titre_41 = customtkinter.CTkLabel(frame_4, text = "Bienvenue Chez Dupont", font = style_1, text_color="ivory")
-titre_42 = customtkinter.CTkLabel(frame_4, text = "Ici, tu peux acheter tous les produits dont tu as besoin.", font = style_2, text_color="ivory")
-titre_41.place(relx = 0.05, rely = 0.3, anchor = "w")
-titre_42.place(relx = 0.05, rely = 0.6, anchor = "w")
-
-
 # Inserisco un input nel frame_3
 def stampa_scontrino():
     user_input_1 = int(entry_1.get())  # Recupera il testo
@@ -96,6 +37,71 @@ def stampa_scontrino():
 def effacet_tout():
     tous_les_produits.clear()
     textbox.delete("0.0", "end")
+
+
+# Definizione della finestra principale (Village)
+shop = customtkinter.CTk()
+shop.geometry("1000x800")
+shop.title("Cash & Soda: La lutte pour la liberté")
+shop.iconbitmap('./Images/can.ico')
+
+# Inserzione degli stili di scrittura
+style_1 = customtkinter.CTkFont("Aptos", 28, "bold")
+style_2 = customtkinter.CTkFont("Apotos", 18)
+style_3 = customtkinter.CTkFont("Apotos", 16, slant="italic")
+style_4 = customtkinter.CTkFont("Apotos", 24, "bold")
+style_5 = customtkinter.CTkFont("Apotos", 18, "bold")
+
+
+# Inserzione dei frame
+frame_1 = customtkinter.CTkFrame(shop, fg_color="#143d59", corner_radius=0, height=800, width=300)
+frame_2 = customtkinter.CTkFrame(shop, fg_color="#f4b41a", height=800, width=1000)
+frame_3 = customtkinter.CTkFrame(frame_2, fg_color="ivory", corner_radius=20, height=400, width=600,
+                                 bg_color="#f4b41a", border_color="#143d59", border_width=10)
+frame_4 = customtkinter.CTkFrame(frame_2, fg_color="#143d59", corner_radius=20, height=150, width=600,
+                                 bg_color="#f4b41a", border_color="ivory", border_width=5)
+frame_1.pack(ipadx=10, ipady=10, expand=True, fill=BOTH, side=RIGHT)
+frame_2.pack(ipadx=10, ipady=10, expand=True, fill=BOTH)
+frame_2.lower()
+frame_3.place(relx=0.5, rely=0.6, anchor="center")
+frame_4.place(relx=0.5, rely=0.2, anchor="center")
+
+
+# Bottene nel frame_2
+sortir = customtkinter.CTkButton(frame_2, text="sortir", text_color="#f4b41a", fg_color="#143d59", font=style_2)
+sortir.place(relx = 0.78, rely = 0.95, anchor ="center")
+
+
+
+# Widget del fraime_1
+titre_11 = customtkinter.CTkLabel(frame_1, text = "Panier:", font = style_1, text_color="ivory")
+titre_11.place(relx = 0.1, rely = 0.65, anchor = "w")
+textbox = customtkinter.CTkTextbox(frame_1, height=230, width=290, fg_color="#143d59", text_color="ivory", font=style_2)
+#textbox.configure(state="disabled")
+textbox.place(relx = 0.5, rely = 0.7, anchor = "n")
+# Per inserire la lita dei prodotti a disposizio e il titolo "Prodotti a disposizione"
+titre_12 = customtkinter.CTkLabel(frame_1, text = "Les produits à votre\ndisposition:", font = style_1, text_color="ivory", justify="left")
+ingredientes = customtkinter.CTkLabel(frame_1, text = f"\n{produit_1.nom} : {produit_1.quantite} {produit_1.unite}\n"
+                                                      f"\n{produit_2.nom} : {produit_2.quantite} {produit_2.unite}\n"
+                                                      f"\n{produit_3.nom} : {produit_3.quantite} {produit_3.unite}\n"
+                                                      f"\n{produit_4.nom} : {produit_4.quantite} {produit_4.unite}\n"
+                                                      f"\n{produit_5.nom} : {produit_5.quantite} {produit_5.unite}\n"
+                                                      f"\n{produit_6.nom} : {produit_6.quantite} {produit_6.unite}\n"
+                                                      f"\n{produit_7.nom} : {produit_7.quantite} {produit_7.unite}\n"
+                                                      f"\n{produit_8.nom} : {produit_8.quantite} {produit_8.unite}\n",
+                                      font = style_2, text_color="ivory", justify="left")
+titre_12.place(relx = 0.1, rely = 0.1, anchor = "w")
+ingredientes.place(relx = 0.1, rely = 0.38, anchor = "w")
+
+
+
+
+# Labels per inserire del testo nel frame_4
+titre_41 = customtkinter.CTkLabel(frame_4, text = "Bienvenue Chez Dupont", font = style_1, text_color="ivory")
+titre_42 = customtkinter.CTkLabel(frame_4, text = "Ici, tu peux acheter tous les produits dont tu as besoin.", font = style_2, text_color="ivory")
+titre_41.place(relx = 0.05, rely = 0.3, anchor = "w")
+titre_42.place(relx = 0.05, rely = 0.6, anchor = "w")
+
 
 entry_1 = customtkinter.CTkEntry(frame_3, placeholder_text="CTkEntry", height=20, width=70)
 entry_2 = customtkinter.CTkEntry(frame_3, placeholder_text="CTkEntry", height=20, width=70)
