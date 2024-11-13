@@ -1,0 +1,101 @@
+import customtkinter
+from PIL import Image
+from tkinter import BOTH, RIGHT
+
+# Création de la fenêtre principale
+banque = customtkinter.CTk()
+banque.geometry("1000x600")
+banque.title("Cash & Soda: La lutte pour la liberté")
+
+# Chargement de l'image 
+image = Image.open("C:/Users/theob/Desktop/Cash_and_soda_BANQUE/Image/Banque_rat.webp")  # Remplace "chemin/vers/ton_image.png" par le vrai chemin de ton image
+photo = customtkinter.CTkImage(light_image=image, size=(600, 400))  # Ajuste la taille de l'image si nécessaire
+
+# Définition des styles de texte
+style_2 = customtkinter.CTkFont("Apotos", 18, "bold")
+style_6 = customtkinter.CTkFont("Apotos", 12)
+
+# Création des cadres
+frame_1 = customtkinter.CTkFrame(banque, fg_color="#143d59", corner_radius=0, height=800, width=300)
+frame_2 = customtkinter.CTkFrame(banque, fg_color="#f4b41a", height=800, width=1000)
+frame_3 = customtkinter.CTkFrame(frame_2, fg_color="ivory", corner_radius=20, height=100, width=600,
+                                 bg_color="#f4b41a", border_color="#143d59", border_width=10)
+
+frame_1.pack(ipadx=10, ipady=10, expand=True, fill=BOTH, side=RIGHT)
+frame_2.pack(ipadx=10, ipady=10, expand=True, fill=BOTH)
+frame_2.lower()
+frame_3.place(relx=0.5, rely=0.8, anchor="center")
+
+# Image du rat 
+image_label = customtkinter.CTkLabel(frame_2, image=photo, text=" ")
+image_label.place(relx=0.5, rely=0.3, anchor="center")  # Place l'image au centre (ajuste les coordonnées si nécessaire)
+
+# Insertion du titre
+titre = customtkinter.CTkLabel(frame_1, text="Bienvenue à la banque !", font=style_2, text_color="ivory")
+titre.place(relx=0.2, rely=0.2, anchor="w")
+
+description = customtkinter.CTkLabel(frame_1, text="Vous voilà à la banque, votre but est de recevoir un \n prêt du banquier. Pour cela il vous faudra d’abord \n essayer de le convaincre …", font=style_6, text_color="ivory", width=10)
+description.place(relx=0.1, rely=0.3, anchor="w")
+
+# Liste des dialogues
+dialogues = [
+    "Personnage Principal :\n« Bonjour, Monsieur le Banquier. Est-il possible de me donner un prêt ? »",
+    "Banquier :\n« Ah, un prêt... Un prêt, vous dites ? Bien, écoutez, c'est une question très importante... »",
+    "Personnage Principal (d'un ton un peu plus fatigué) :\n« Mais, est-il possible de me donner un prêt, s'il vous plaît ? »",
+    "Banquier :\n« Ah, vous êtes pressé, je vois ! Très bien, mais laissez-moi vous expliquer... »",
+    "Personnage Principal (commençant à somnoler) :\n« Alors... est-il possible de me donner un prêt ? »",
+    "Banquier :\n« Ah, la question revient... »",
+    "Personnage Principal (les yeux lourds, se laissant envahir par le sommeil) :\n« Je... je comprends... mais... est-il possible de me donner un... prêt... ? »",
+    "Banquier :\n« Ah, vous avez l’air... fatigué... Eh bien, laissez-moi encore vous parler de... »",
+    "Personnage Principal (s’endormant profondément) :\n« Zzzz... »"
+]
+
+# Fonction pour ouvrir la deuxième fenêtre après avoir cliqué sur "Option 1" et "Avancer"
+def ouvrir_seconde_fenetre():
+    if checkbox1.get():  # Vérifie si la première option est cochée
+        # Ferme la fenêtre principale
+        banque.withdraw()  # Cache la fenêtre principale
+
+        # Crée la deuxième fenêtre
+        nouvelle_fenetre = customtkinter.CTkToplevel(banque)
+        nouvelle_fenetre.geometry("500x300")
+        nouvelle_fenetre.title("Dialogue avec le Banquier")
+
+        # Variable pour suivre la progression du dialogue
+        index_dialogue = [0]  # Liste pour maintenir la variable mutable dans la fonction
+
+        # Insertion du premier texte
+        texte = customtkinter.CTkLabel(nouvelle_fenetre, text=dialogues[index_dialogue[0]], font=style_6)
+        texte.pack(pady=50)
+
+        # Fonction pour mettre à jour le texte
+        def afficher_dialogue():
+            if index_dialogue[0] < len(dialogues) - 1:  # Si il y a encore du dialogue à afficher
+                index_dialogue[0] += 1
+                texte.configure(text=dialogues[index_dialogue[0]])  # Mettre à jour le texte
+            else:
+                nouvelle_fenetre.destroy()  # Fermer la fenêtre quand tout le dialogue est affiché
+
+        # Ajouter un bouton "Continuer"
+        bouton_continuer = customtkinter.CTkButton(nouvelle_fenetre, text="Continuer", font=style_2, command=afficher_dialogue)
+        bouton_continuer.pack(pady=20)
+
+# Ajouter des cases à cocher dans frame_3
+checkbox1 = customtkinter.CTkCheckBox(frame_3, text="Option 1: Entammer un dialogue avec le banquier", font=style_2)
+checkbox1.place(relx=0.1, rely=0.3, anchor="w")
+
+checkbox2 = customtkinter.CTkCheckBox(frame_3, text="Option 2: recourir à la force", font=style_2, state="disabled")  # checkbox2 est désactivée au départ
+checkbox2.place(relx=0.1, rely=0.6, anchor="w")
+
+# Ajout des boutons 
+Avancer = customtkinter.CTkButton(frame_1, text="Avancer", font=style_2, text_color="ivory", command=ouvrir_seconde_fenetre)  # Lancement de la deuxième fenêtre au clic
+Avancer.place(relx=0.85, rely=1, anchor="center")
+
+Annuler = customtkinter.CTkButton(frame_1, text="Annuler", font=style_2, text_color="ivory")
+Annuler.place(relx=0.5, rely=1, anchor="center")
+
+Retour = customtkinter.CTkButton(frame_1, text="Retour", font=style_2, text_color="ivory")
+Retour.place(relx=0.15, rely=1, anchor="center")
+
+# Boucle principale de l'application
+banque.mainloop()
